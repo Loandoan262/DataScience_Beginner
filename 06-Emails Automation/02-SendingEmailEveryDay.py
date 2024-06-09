@@ -5,7 +5,7 @@
 # For this purpuse, each company has an ETL system (e.g. Databricks, airflow apache, ...). In this course, we will use PythonAnywhere
 # 
 
-# In[15]:
+# In[2]:
 
 
 import os
@@ -14,13 +14,13 @@ import time
 from datetime import datetime as dt
 
 
-# In[16]:
+# In[3]:
 
 
 pw = os.getenv('EMAIL_PASSWORD')
 
 
-# In[17]:
+# In[4]:
 
 
 sender = "minhloan.ftu@gmail.com"
@@ -31,13 +31,37 @@ subject = "This is the subject"
 contents = """ 
 Here is the content of the email!
 """
-while True:
-    now = dt.now()
-    if now.hour == 21:
-        yag = yagmail.SMTP(user=sender, password=os.getenv('EMAIL_PASSWORD'))
-        yag.send(to=receiver, subject=subject, contents=contents)
-        print("Email sent!")
-        time.sleep(3600)
+
+yag = yagmail.SMTP(user=sender, password=os.getenv('EMAIL_PASSWORD'))
+yag.send(to=receiver, subject=subject, contents=contents)
+print("Email sent!")
 
 
-# !jupyter nbconvert --to python 02-Sending Email Every Day.ipynb
+# **To convert .ipynb to .py, use command below in Terminal:**
+# *jupyter nbconvert --to python 02-SendingEmailEveryDay.ipynb*
+
+# # Send email monthly
+
+# In[8]:
+
+
+sender = "minhloan.ftu@gmail.com"
+receiver = "loandoan.hsrw@gmail.com"
+
+subject = "This is the subject"
+
+contents = """ 
+Here is the content of the email!
+"""
+now = dt.now()
+if now.day == 22:
+    yag = yagmail.SMTP(user=sender, password=os.getenv('EMAIL_PASSWORD'))
+    yag.send(to=receiver, subject=subject, contents=contents)
+    print("Email sent!")
+
+
+# In[ ]:
+
+
+
+
